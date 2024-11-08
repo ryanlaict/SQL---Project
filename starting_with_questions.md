@@ -3,7 +3,6 @@ Answer the following questions and provide the SQL queries used to find the answ
     
 **Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
 
-
 SQL Queries:
 
 With countries_transactionrevenue as (SELECT
@@ -32,7 +31,10 @@ From countries_transactionrevenue
 where TRANSACTION_RANK < 3 -- Looking at all top ranked countries 
 
 Answer:
-The top 3 countries and their cities are United States: San Francisco, Israel: Tel Aviv and Australia:Sydney. The top city in the dataset for the United States was other but due to that being a catch-all for undefined cities in the US, we are unable to determine 
+The top 3 countries and their cities are United States: San Francisco, Israel: Tel Aviv and Australia:Sydney.
+
+![image](https://github.com/user-attachments/assets/bd5de440-89e8-47f7-9ea7-0ab0b66fbdea)
+
 
 
 
@@ -56,6 +58,7 @@ HAVING
 Order BY average_number_orders DESC
 
 Answer
+![image](https://github.com/user-attachments/assets/50bddeec-7e67-41b3-baa6-b6504a41b36e)
 
 
 **Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
@@ -80,6 +83,8 @@ ORDER BY
 
 
 Answer:
+
+![image](https://github.com/user-attachments/assets/bfb1b2f3-26a9-4ccf-ae4e-84b098d60f47)
 
 
 **Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
@@ -124,60 +129,65 @@ ORDER BY
 
 Answer:
 
-
+![image](https://github.com/user-attachments/assets/d8a8435d-5c43-49f6-a7e8-1547a9a6ec47)
 
 
 
 **Question 5: Can we summarize the impact of revenue generated from each city/country?**
 
 SQL Queries:
-
-WITH
-	TOTAL_REVENUE AS (
+--Create a CTE to calculate total transaction revenue by country and city and also overall total transaction revenue. 
+With total_revenue as (
 		SELECT
-			COUNTRY, -- Selecting country
-			CITY, -- Selecting city 
-			SUM(TOTALTRANSACTIONREVENUE) AS TOTAL_REVENUE_COUNTRY, -- Aggregating the total transaction Revenue
-			COUNT(VISITID) AS NUMBER_OF_VISITORS,
-			(
-				SUM(TOTALTRANSACTIONREVENUE) / COUNT(V2PRODUCTNAME)
-			) AVERAGE_PRODUCT_REVENUE,
-			COUNT(V2PRODUCTCATEGORY) AS NUMBER_TYPES_PRODUCTS,
+			COUNTRY,
+			CITY,
+			SUM(TOTALTRANSACTIONREVENUE) AS COUNTRY_REVENUE, --Sum totaltransaction Revenue to be aggrergated by country and city
 			(
 				SELECT
-					SUM(TOTALTRANSACTIONREVENUE) AS TOTAL_REVENUE
+					SUM(TOTALTRANSACTIONREVENUE)
 				FROM
-					SESSIONS
-			) --calculating the total
+					CLEANEDSESSIONS
+			) AS TOTAL_TRANSACTION_REVENUE -- Subquery to pull the full totaltransaction revenue to be able to calculate percentage of revenue
 		FROM
-			SESSIONS
-		WHERE
-			TOTALTRANSACTIONREVENUE IS NOT NULL
+			CLEANEDSESSIONS
+		Where totaltransactionrevenue > 0
 		GROUP BY
 			1,
 			2
-	)
- -- Query to run the TOTAL_REVENUE CTE and utilize the calculated revenue percentage  
+
+)
+
+--Query to break it down by country 
 SELECT
 	COUNTRY,
-	CITY,
-	NUMBER_OF_VISITORS,
-	TOTAL_REVENUE_COUNTRY,
-	AVERAGE_PRODUCT_REVENUE,
-	((TOTAL_REVENUE_COUNTRY / TOTAL_REVENUE) * 100) AS PERCENTAGE_REVENUE,
-	RANK() OVER (
-		ORDER BY
-			((TOTAL_REVENUE_COUNTRY / TOTAL_REVENUE) * 100) DESC
-	) AS RANK_PERCENTAGE_REVENUE,
-	RANK() OVER (
-		ORDER BY
-			NUMBER_OF_VISITORS DESC
-	) AS RANK_TOTAL_VISITORS
+	COUNTRY_REVENUE,
+	TOTAL_TRANSACTION_REVENUE,
+	(COUNTRY_REVENUE / TOTAL_TRANSACTION_REVENUE) * 100 AS PERCENTAGE_REVENUE --Caculating country'
 FROM
 	TOTAL_REVENUE
+ORDER BY
+	PERCENTAGE_REVENUE DESC
+	
+	--Query to break the percentage down by US cities
+SELECT
+	COUNTRY,
+	city -- adding city to be able to determine which cities within the united states contributed the most
+	COUNTRY_REVENUE,
+	TOTAL_TRANSACTION_REVENUE,
+	(COUNTRY_REVENUE / TOTAL_TRANSACTION_REVENUE) * 100 AS PERCENTAGE_REVENUE --Calculating country's percentage of total revenue
+FROM
+	TOTAL_REVENUE
+WHERE
+	COUNTRY = 'United States'
+ORDER BY PERCENTAGE_REVENUE DESC
+
 
 Answer:
+![image](https://github.com/user-attachments/assets/bf1e8b42-9ba4-4549-bf2f-fa90a1a42b0a)
 
+![image](https://github.com/user-attachments/assets/c76cbe59-4ed9-4f68-aa81-8a9c438b71ed)
+
+To best summarize the impact of revenue by country and city. I made two pie charts. The first is a breakdown of revenue by countries. As the US was a signficant portion of it. I decided to create an additional query to further breakdown the United States by city to determine which cities contributed the most. 
 
 
 
