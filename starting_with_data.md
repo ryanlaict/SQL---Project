@@ -1,6 +1,6 @@
-Question 1: What were the top 10 countries by visitors and Time spent on site
+##Question 1: What were the top 10 countries by visitors and Time spent on site
 
-SQL Queries:
+#SQL Queries:
 
 WITH COUNTRY_TRAFFIC AS (
     SELECT
@@ -24,7 +24,7 @@ ORDER BY
     total_visits DESC, 
     avg_time_on_site DESC;
     
-Answer: 
+#Answer: 
 
 ![image](https://github.com/user-attachments/assets/4b924916-3d7b-40ac-a757-de3ce54c2eae)
 Top 10 countries by Visitors
@@ -32,9 +32,9 @@ Top 10 countries by Visitors
 ![image](https://github.com/user-attachments/assets/43f3e286-2776-422c-80dd-ca57713ed09e)
 Top 10 countries by Time spent on site
 
-Question 2: Which products were the most viewed by country
+##Question 2: Which products were the most viewed by country
 
-SQL Queries:
+#SQL Queries:
 --Create CTE to rank all products by views partitioned by Country
 WITH
 	PRODUCT_COUNTRY_RANKED AS (
@@ -60,13 +60,13 @@ From PRODUCT_COUNTRY_RANKED --Calling created above CTE: PRODUCT_COUNTRY_RANKED
 Where product_view_ranked = 1 -- Filtereing for top ranked products 
 Order by count DESC
 
-Answer:
+#Answer:
 
 ![image](https://github.com/user-attachments/assets/48c9cd97-8835-4d41-9d3b-a5d7b819c3bf)
 
-Question 3: Top 15 countries with largest differential from Sentiment
+##Question 3: Top 15 countries with largest differential from Sentiment
 
-SQL Queries:
+#SQL Queries:
 
 SELECT
     COUNTRY,
@@ -92,9 +92,9 @@ Answer:
 ![image](https://github.com/user-attachments/assets/57fecbb6-6ee8-4ac2-ac46-327ea785c140) --top 15 countries with positive difference from the overall average sentiment score
 
 
-Question 4: Which channel grouping generated the most revenue. What was the most productive productive method of referring customers and who spent the most time 
+##Question 4: Which channel grouping generated the most revenue. What was the most productive productive method of referring customers and who spent the most time 
 
-SQL Queries:
+#SQL Queries:
 
 SELECT 
     COUNTRY,
@@ -110,13 +110,13 @@ HAVING
 ORDER BY 
     total_revenue DESC;
     
-Answer:
+#Answer:
 ![image](https://github.com/user-attachments/assets/d13b94a1-7970-4958-88ab-4c17fcdc8b43)
 
 
-Question 5: Looking at transactions with checkout vs timeonsite to see how long the conversate is, comparing it with customers who did not. What was the difference on site. 
+##Question 5: Looking at transactions with checkout vs timeonsite to see how long the conversate is, comparing it with customers who did not. What was the difference on site. 
 
-SQL Queries:
+##SQL Queries:
 
 WITH sessions_duration AS (
     SELECT
@@ -143,5 +143,5 @@ GROUP BY
 ORDER BY 
     avg_duration_in_mins DESC;
     
-Answer:
+#Answer:
 ![image](https://github.com/user-attachments/assets/cdb4886c-b452-4427-b167-cdaf06216203)
