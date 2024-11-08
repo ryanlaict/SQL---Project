@@ -1,4 +1,4 @@
-Question 1: Which countries have the highest level of traffic to the site, in terms of number and time spent on site
+Question 1: What were the top 10 countries by visitors and Time spent on site
 
 SQL Queries:
 
@@ -14,11 +14,11 @@ WITH COUNTRY_TRAFFIC AS (
     GROUP BY
         COUNTRY
     ORDER BY
-        total_visits DESC
+        total_visits DESC --order by total visits descending
 )
 
 SELECT *
-FROM COUNTRY_TRAFFIC
+FROM COUNTRY_TRAFFIC --calling from previously created CTE 
 WHERE COUNTRY NOT IN ('(not set)')  -- Exclude records with unspecified countries
 ORDER BY 
     total_visits DESC, 
@@ -26,9 +26,16 @@ ORDER BY
     
 Answer: 
 
+![image](https://github.com/user-attachments/assets/4b924916-3d7b-40ac-a757-de3ce54c2eae)
+Top 10 countries by Visitors
+
+![image](https://github.com/user-attachments/assets/43f3e286-2776-422c-80dd-ca57713ed09e)
+Top 10 countries by Time spent on site
+
 Question 2: Which products were the most viewed by country
 
 SQL Queries:
+--Create CTE to rank all products by views partitioned by Country
 WITH
 	PRODUCT_COUNTRY_RANKED AS (
 		SELECT
@@ -49,15 +56,18 @@ WITH
 	)
 
 Select *
-From PRODUCT_COUNTRY_RANKED
-Where product_view_ranked = 1
+From PRODUCT_COUNTRY_RANKED --Calling created above CTE: PRODUCT_COUNTRY_RANKED  
+Where product_view_ranked = 1 -- Filtereing for top ranked products 
 Order by count DESC
 
 Answer:
 
-Question 3: How does the sentiment score affect the order quantity of a product, which country looked at the highest rated products
+![image](https://github.com/user-attachments/assets/48c9cd97-8835-4d41-9d3b-a5d7b819c3bf)
+
+Question 3: Top 15 countries with largest differential from Sentiment
 
 SQL Queries:
+
 SELECT
     COUNTRY,
     CHANNELGROUPING,
@@ -78,6 +88,8 @@ ORDER BY
     COUNTRY;
 
 Answer:
+![image](https://github.com/user-attachments/assets/75b85575-a1c4-4993-8936-ab02fb9a0b48) -- Top 15 countries with negative difference from the overall average sentiment score
+![image](https://github.com/user-attachments/assets/57fecbb6-6ee8-4ac2-ac46-327ea785c140) --top 15 countries with positive difference from the overall average sentiment score
 
 
 Question 4: Which channel grouping generated the most revenue. What was the most productive productive method of referring customers and who spent the most time 
@@ -99,6 +111,7 @@ ORDER BY
     total_revenue DESC;
     
 Answer:
+![image](https://github.com/user-attachments/assets/d13b94a1-7970-4958-88ab-4c17fcdc8b43)
 
 
 Question 5: Looking at transactions with checkout vs timeonsite to see how long the conversate is, comparing it with customers who did not. What was the difference on site. 
@@ -109,11 +122,11 @@ WITH sessions_duration AS (
     SELECT
         TOTALTRANSACTIONREVENUE,  -- Total revenue from each session
         TIMEONSITE / 60.0 AS duration_in_mins,  -- Time spent on site in minutes
-        CHANNELGROUPING,
+        CHANNELGROUPING, --selecting the channeling grouping column
         CASE
-            WHEN TOTALTRANSACTIONREVENUE IS NOT NULL THEN 'Paying Session'
-            ELSE 'Not Paying Session'
-        END AS customer_type
+            WHEN TOTALTRANSACTIONREVENUE IS NOT NULL THEN 'Paying Session' --Classify the visit as a paying session when the totaltransactionrevenue column is not null
+            ELSE 'Not Paying Session' --if it is NULL, classify it as a non paying sessions
+        END AS customer_type --ending it as a customer_type to group it by later. 
     FROM
         sessions
 )
@@ -121,12 +134,14 @@ WITH sessions_duration AS (
 SELECT 
     customer_type,
     CHANNELGROUPING,
-    ROUND(AVG(duration_in_mins), 2) AS avg_duration_in_mins,
-    SUM(TOTALTRANSACTIONREVENUE) AS total_revenue
+    ROUND(AVG(duration_in_mins), 2) AS avg_duration_in_mins, --round the average duration to a two decimal point
+    SUM(TOTALTRANSACTIONREVENUE) AS total_revenue --sum the total transaction revenue 
 FROM 
     sessions_duration
 GROUP BY 
     customer_type, CHANNELGROUPING
 ORDER BY 
     avg_duration_in_mins DESC;
+    
 Answer:
+![image](https://github.com/user-attachments/assets/cdb4886c-b452-4427-b167-cdaf06216203)
