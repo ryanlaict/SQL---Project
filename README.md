@@ -11,7 +11,7 @@ Standardize Missing and Null Values: Replaced values such as ‘(not set)’ in 
 Adjust Numeric Fields for Readability: Scaled totalTransactionRevenue by dividing by 1,000,000 to make revenue numbers more interpretable.
 Deduplicate Records: Identified potential duplicates based on the same fullVisitorId, productSKU, and date fields to distinguish between repeat visits and true duplicate records.
 
-###Quality Analysis
+### Quality Analysis
 Completeness Checks: Verified essential columns (e.g., country, city, v2ProductName, v2ProductCategory, fullVisitorId) are populated to ensure data completeness.
 Range and Consistency Checks: Validated that totalTransactionRevenue and date values were within expected ranges and that transaction records had both transactionId and revenue values.
 Schema Verification: Ensured data types and nullability for each column matched expectations, avoiding mismatches that could disrupt analysis.
