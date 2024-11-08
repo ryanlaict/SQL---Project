@@ -55,77 +55,7 @@ HAVING
 	ROUND(AVG(PRODUCTQUANTITY)::NUMERIC, 2) IS NOT NULL --Only pulling information where product quantity is available to not skew data 
 Order BY average_number_orders DESC
 
-Answer: 
-country	city	v2productcategory	count
-United States	Other	Home/Nest/Nest-USA/	6
-United States	San Francisco	Home/Nest/Nest-USA/	3
-United States	Other	Electronics	2
-United States	Other	Home/Apparel/Women's/Women's-T-Shirts/	2
-United States	Palo Alto	Home/Nest/Nest-USA/	2
-United States	Other	Home/Apparel/Men's/Men's-T-Shirts/	2
-United States	Mountain View	Apparel	2
-United States	Other	Nest-USA	2
-United States	New York	Home/Accessories/Fun/	1
-United States	San Jose	Apparel	1
-United States	Sunnyvale	Nest-USA	1
-United States	Other	Apparel	1
-United States	Other	Home/Apparel/	1
-United States	Other	Bags	1
-United States	New York	Home/Apparel/Men's/Men's-T-Shirts/	1
-United States	New York	Home/Apparel/Kid's/Kid's-Infant/	1
-United States	San Francisco	Home/Drinkware/Water Bottles and Tumblers/	1
-United States	New York	Home/Shop by Brand/	1
-United States	Other	Home/Office/Notebooks & Journals/	1
-United States	Other	Home/Accessories/Pet/	1
-United States	Mountain View	Nest-USA	1
-United States	Los Angeles	Home/Nest/Nest-USA/	1
-United States	Houston	Home/Drinkware/	1
-United States	Other	Home/Apparel/Kid's/Kid's-Infant/	1
-United States	Other	Waze	1
-Australia	Sydney	Nest-USA	1
-United States	San Francisco	Home/Accessories/Fun/	1
-Israel	Tel Aviv-Yafo	Home/Nest/Nest-USA/	1
-United States	San Francisco	Home/Apparel/Men's/Men's-Outerwear/	1
-United States	Mountain View	Home/Electronics/Electronics Accessories/	1
-United States	Other	Lifestyle	1
-United States	Other	Home/Drinkware/	1
-United States	Atlanta	Home/Apparel/Men's/Men's-T-Shirts/	1
-United States	Los Angeles	Home/Apparel/Women's/	1
-United States	Mountain View	Home/Apparel/Kid's/Kid's-Infant/	1
-United States	New York	${escCatTitle}	1
-United States	Mountain View	Waze	1
-United States	Other	Home/Shop by Brand/Google/	1
-United States	San Francisco	Nest-USA	1
-United States	Austin	Apparel	1
-United States	Sunnyvale	Housewares	1
-United States	Mountain View	Home/Nest/Nest-USA/	1
-United States	Austin	Home/Shop by Brand/Google/	1
-United States	Chicago	Nest-USA	1
-United States	Chicago	Lifestyle	1
-United States	Columbus	(not set)	1
-United States	San Francisco	Home/Apparel/Women's/Women's-T-Shirts/	1
-Canada	Toronto	Apparel	1
-United States	San Francisco	Home/Accessories/Drinkware/	1
-United States	San Francisco	${escCatTitle}	1
-United States	Palo Alto	Nest-USA	1
-United States	San Jose	Home/Nest/Nest-USA/	1
-United States	Chicago	Home/Office/Writing Instruments/	1
-United States	Seattle	Home/Nest/Nest-USA/	1
-United States	Atlanta	Bags	1
-United States	Mountain View	Home/Apparel/Women's/Women's-Outerwear/	1
-United States	New York	Apparel	1
-United States	San Francisco	Home/Bags/	1
-United States	Sunnyvale	Home/Nest/Nest-USA/	1
-United States	San Bruno	Home/Apparel/Men's/	1
-United States	San Francisco	Home/Shop by Brand/Android/	1
-United States	Other	Home/Bags/	1
-United States	Nashville	Nest-USA	1
-Canada	New York	Home/Apparel/Men's/Men's-Outerwear/	1
-United States	New York	Home/Apparel/Men's/Men's-Performance Wear/	1
-Switzerland	Zurich	Home/Apparel/Men's/Men's-T-Shirts/	1
-United States	New York	Home/Nest/Nest-USA/	1
-United States	Sunnyvale	Home/Apparel/Men's/Men's-T-Shirts/	1
-
+Answer
 
 
 **Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
@@ -150,9 +80,6 @@ ORDER BY
 
 
 Answer:
-
-
-
 
 
 **Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
