@@ -3,7 +3,7 @@
 ## Project/Goals
 The main objective of this project is to transform and analyze web session data to gain insights into user behavior, product popularity, and transactional patterns. Key goals include identifying countries with the highest site traffic, finding the most popular products by region, and examining customer engagement patterns based on time spent on site and conversion rates.
 
-This project aims to leverage SQL to perform data cleaning, transformation, and aggregation tasks and to generate insights for improving business strategies around site engagement and revenue growth.
+This project aims to use SQL to perform data cleaning, transformation, and aggregation tasks and to generate insights into the dataset for customer behaviours across countries and cities. 
 
 ## Process
 ### Data Cleaning (Step 1)
