@@ -71,6 +71,7 @@ Order by count DESC
 ```
 **Answer:**
 
+
 ![image](https://github.com/user-attachments/assets/48c9cd97-8835-4d41-9d3b-a5d7b819c3bf)
 
 **Question 3: Top 15 countries with largest differential from Sentiment**
