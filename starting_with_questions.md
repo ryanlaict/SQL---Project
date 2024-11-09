@@ -2,7 +2,7 @@ Answer the following questions and provide the SQL queries used to find the answ
 
     
 **Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
-
+```
 SQL Queries:
 
 With countries_transactionrevenue as (SELECT
@@ -25,11 +25,12 @@ GROUP BY
 ORDER BY
 	SUM(TOTALTRANSACTIONREVENUE) DESC --order the output by largest to smallest
 	)
-
+```
+```
 select * --calling the created CTE above
 From countries_transactionrevenue
 where TRANSACTION_RANK < 3 -- Looking at all top ranked countries 
-
+```
 Answer:
 The top 3 countries and their cities are United States: San Francisco, Israel: Tel Aviv and Australia:Sydney.
 
@@ -40,7 +41,7 @@ The top 3 countries and their cities are United States: San Francisco, Israel: T
 
 **Question 2: What is the average number of products ordered from visitors in each city and country?**
 
-
+```
 SQL Queries:
 
 SELECT
@@ -56,7 +57,7 @@ GROUP BY
 HAVING
 	ROUND(AVG(PRODUCTQUANTITY)::NUMERIC, 2) IS NOT NULL --Only pulling information where product quantity is available to not skew data 
 Order BY average_number_orders DESC
-
+```
 Answer
 ![image](https://github.com/user-attachments/assets/50bddeec-7e67-41b3-baa6-b6504a41b36e)
 
@@ -65,6 +66,7 @@ Answer
 
 
 SQL Queries:
+```
 SELECT
 	COUNTRY,
 	CITY,
@@ -81,7 +83,7 @@ GROUP BY
 ORDER BY
 	COUNT(*) DESC
 
-
+```
 Answer:
 
 ![image](https://github.com/user-attachments/assets/bfb1b2f3-26a9-4ccf-ae4e-84b098d60f47)
@@ -91,7 +93,7 @@ Answer:
 
 
 SQL Queries:
-
+```
 WITH ProductSales AS (
     SELECT
         country,
@@ -115,6 +117,8 @@ RankedSales AS (
         ProductSales
 	Where total_sales is not null
 )
+```
+```
 SELECT
     country,
     city,
@@ -126,7 +130,7 @@ WHERE
     sales_rank = 1
 ORDER BY
     country, city, total_sales
-
+```
 Answer:
 
 ![image](https://github.com/user-attachments/assets/d8a8435d-5c43-49f6-a7e8-1547a9a6ec47)
@@ -136,6 +140,7 @@ Answer:
 **Question 5: Can we summarize the impact of revenue generated from each city/country?**
 
 SQL Queries:
+```
 --Create a CTE to calculate total transaction revenue by country and city and also overall total transaction revenue. 
 With total_revenue as (
 		SELECT
@@ -156,7 +161,8 @@ With total_revenue as (
 			2
 
 )
-
+```
+```
 --Query to break it down by country 
 SELECT
 	COUNTRY,
@@ -181,7 +187,7 @@ WHERE
 	COUNTRY = 'United States'
 ORDER BY PERCENTAGE_REVENUE DESC
 
-
+```
 Answer:
 ![image](https://github.com/user-attachments/assets/bf1e8b42-9ba4-4549-bf2f-fa90a1a42b0a)
 
