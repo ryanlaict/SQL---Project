@@ -123,3 +123,59 @@ CREATE OR REPLACE VIEW cleanedsessions AS
 SELECT *
 FROM cleanedsessions;
 ~~~
+
+## CTE Summary
+```
+--CTE to find duplicates with VisitorID, product sku and date
+WITH duplicate_ids AS (
+          SELECT  fullVisitorId, 
+                  productSKU,
+                  date
+          FROM cleanedsessions
+          GROUP BY fullVisitorId, 
+                    productSKU,
+                    date
+          HAVING COUNT(*) > 1
+          )
+Select *
+From Duplicate_ids
+```
+
+##Temporary View
+```
+-- Create a view to clean and standardize data in the sessions table. 
+CREATE OR REPLACE VIEW cleanedsessions AS 
+    (SELECT
+        fullVisitorId, -- unique visitorID
+        channelGrouping,
+	      Case When country = '(not set)' then 'Other'
+	        Else Country
+	          End as country, --replacing Not set countries with other
+        Case When city in ('(not set)', 'not available in demo dataset') then 'Other' 
+	        Else city
+	        End as city, -- cleaning up city (replacing Not Set or not available in this dataset with Other)
+        totalTransactionRevenue/1000000 as totaltransactionrevenue, 
+        COALESCE(transactions, 0) AS transactions, -- replace empty transactions
+	      date,
+        COALESCE(timeOnSite, 0) AS timeOnSite,  -- Fill missing time on site with 0
+        pageviews,
+        sessionQualityDim,
+        visitId, --duplicates depending on visitors
+        type,
+        productPrice,
+        productSKU, --productID that can be used to identify specific products
+        v2ProductName, --name of product
+        v2ProductCategory,--not unique
+        productVariant,
+	      productquantity,
+        currencyCode,
+        COALESCE(transactionRevenue, 0) AS transactionRevenue,  -- Fill missing transaction revenue with 0
+        transactionId, --ID for specific transactions - not complete
+        pageTitle,
+        pagePathLevel1,
+        eCommerceAction_type,
+        eCommerceAction_step,
+        eCommerceAction_option
+	FROM sessions
+	)
+```
