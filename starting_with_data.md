@@ -19,13 +19,14 @@ WITH COUNTRY_TRAFFIC AS (
 )
 
 ```
+```
 SELECT *
 FROM COUNTRY_TRAFFIC --calling from previously created CTE 
 WHERE COUNTRY NOT IN ('(not set)')  -- Exclude records with unspecified countries
 ORDER BY 
     total_visits DESC, 
     avg_time_on_site DESC;
- '''   
+```
 #Answer: 
 
 ![image](https://github.com/user-attachments/assets/4b924916-3d7b-40ac-a757-de3ce54c2eae)
@@ -37,6 +38,8 @@ Top 10 countries by Time spent on site
 **Question 2: Which products were the most viewed by country**
 
 **SQL Queries:**
+
+```
 --Create CTE to rank all products by views partitioned by Country
 WITH
 	PRODUCT_COUNTRY_RANKED AS (
@@ -56,12 +59,13 @@ WITH
 			1,
 			2 -- Group by Country and Product name 
 	)
-
+```
+```
 Select *
 From PRODUCT_COUNTRY_RANKED --Calling created above CTE: PRODUCT_COUNTRY_RANKED  
 Where product_view_ranked = 1 -- Filtereing for top ranked products 
 Order by count DESC
-
+```
 **Answer:**
 
 ![image](https://github.com/user-attachments/assets/48c9cd97-8835-4d41-9d3b-a5d7b819c3bf)
@@ -69,7 +73,7 @@ Order by count DESC
 **Question 3: Top 15 countries with largest differential from Sentiment**
 
 **SQL Queries:**
-
+```
 SELECT
     COUNTRY,
     CHANNELGROUPING,
@@ -88,7 +92,7 @@ GROUP BY
     CHANNELGROUPING
 ORDER BY
     COUNTRY;
-
+```
 Answer:
 ![image](https://github.com/user-attachments/assets/75b85575-a1c4-4993-8936-ab02fb9a0b48) -- Top 15 countries with negative difference from the overall average sentiment score
 ![image](https://github.com/user-attachments/assets/57fecbb6-6ee8-4ac2-ac46-327ea785c140) --top 15 countries with positive difference from the overall average sentiment score
@@ -97,7 +101,7 @@ Answer:
 **Question 4: Which channel grouping generated the most revenue. What was the most productive productive method of referring customers and who spent the most time **
 
 **SQL Queries:**
-
+```
 SELECT 
     COUNTRY,
     CHANNELGROUPING,
@@ -111,7 +115,7 @@ HAVING
     SUM(TOTALTRANSACTIONREVENUE) IS NOT NULL
 ORDER BY 
     total_revenue DESC;
-    
+  ```  
 **Answer:**
 ![image](https://github.com/user-attachments/assets/d13b94a1-7970-4958-88ab-4c17fcdc8b43)
 
@@ -119,7 +123,7 @@ ORDER BY
 **Question 5: Looking at transactions with checkout vs timeonsite to see how long the conversate is, comparing it with customers who did not. What was the difference on site. **
 
 **SQL Queries:**
-
+```
 WITH sessions_duration AS (
     SELECT
         TOTALTRANSACTIONREVENUE,  -- Total revenue from each session
@@ -132,7 +136,8 @@ WITH sessions_duration AS (
     FROM
         sessions
 )
-
+```
+```
 SELECT 
     customer_type,
     CHANNELGROUPING,
@@ -144,6 +149,6 @@ GROUP BY
     customer_type, CHANNELGROUPING
 ORDER BY 
     avg_duration_in_mins DESC;
-    
+ ```   
 **Answer:**
 ![image](https://github.com/user-attachments/assets/cdb4886c-b452-4427-b167-cdaf06216203)
