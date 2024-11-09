@@ -2,6 +2,7 @@
 
 **SQL Queries:**
 
+'''
 WITH COUNTRY_TRAFFIC AS (
     SELECT
         COUNTRY,
@@ -23,7 +24,7 @@ WHERE COUNTRY NOT IN ('(not set)')  -- Exclude records with unspecified countrie
 ORDER BY 
     total_visits DESC, 
     avg_time_on_site DESC;
-    
+ '''   
 #Answer: 
 
 ![image](https://github.com/user-attachments/assets/4b924916-3d7b-40ac-a757-de3ce54c2eae)
