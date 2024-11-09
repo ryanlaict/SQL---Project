@@ -18,6 +18,7 @@ WITH COUNTRY_TRAFFIC AS (
         total_visits DESC --order by total visits descending
 )
 
+'''
 SELECT *
 FROM COUNTRY_TRAFFIC --calling from previously created CTE 
 WHERE COUNTRY NOT IN ('(not set)')  -- Exclude records with unspecified countries
