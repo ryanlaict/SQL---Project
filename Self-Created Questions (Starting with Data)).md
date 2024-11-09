@@ -28,12 +28,14 @@ ORDER BY
     total_visits DESC, 
     avg_time_on_site DESC;
 ```
-#Answer: 
+**Answer:**
 
 ![image](https://github.com/user-attachments/assets/4b924916-3d7b-40ac-a757-de3ce54c2eae)
+
 Top 10 countries by Visitors
 
 ![image](https://github.com/user-attachments/assets/43f3e286-2776-422c-80dd-ca57713ed09e)
+
 Top 10 countries by Time spent on site
 
 **Question 2: Which products were the most viewed by country**
@@ -95,8 +97,12 @@ ORDER BY
     COUNTRY;
 ```
 Answer:
-![image](https://github.com/user-attachments/assets/75b85575-a1c4-4993-8936-ab02fb9a0b48) -- Top 15 countries with negative difference from the overall average sentiment score
-![image](https://github.com/user-attachments/assets/57fecbb6-6ee8-4ac2-ac46-327ea785c140) --top 15 countries with positive difference from the overall average sentiment score
+![image](https://github.com/user-attachments/assets/75b85575-a1c4-4993-8936-ab02fb9a0b48)
+
+-- Top 15 countries with negative difference from the overall average sentiment score
+![image](https://github.com/user-attachments/assets/57fecbb6-6ee8-4ac2-ac46-327ea785c140) 
+
+--top 15 countries with positive difference from the overall average sentiment score
 
 
 **Question 4: Which channel grouping generated the most revenue. What was the most productive productive method of referring customers and who spent the most time **
