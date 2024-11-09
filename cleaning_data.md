@@ -7,7 +7,6 @@ Through this process, I will attempted to address the following issues through c
 - Standardization
     - Standardizing countries    
 - Preparing data for furthur analysis
-- 
 Queries:
 Below, provide the SQL queries you used to clean your data.
 
