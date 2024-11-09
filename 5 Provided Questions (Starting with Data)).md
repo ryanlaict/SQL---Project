@@ -61,6 +61,7 @@ HAVING
 Order BY average_number_orders DESC
 ```
 Answer
+
 ![image](https://github.com/user-attachments/assets/50bddeec-7e67-41b3-baa6-b6504a41b36e)
 
 
@@ -191,6 +192,7 @@ ORDER BY PERCENTAGE_REVENUE DESC
 
 ```
 Answer:
+
 ![image](https://github.com/user-attachments/assets/bf1e8b42-9ba4-4549-bf2f-fa90a1a42b0a)
 
 ![image](https://github.com/user-attachments/assets/c76cbe59-4ed9-4f68-aa81-8a9c438b71ed)
